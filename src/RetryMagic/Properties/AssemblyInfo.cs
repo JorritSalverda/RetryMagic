@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Retry")]
+[assembly: AssemblyTitle("RetryMagic")]
 [assembly: AssemblyDescription("A c# library to retry code with a truncated binary exponential backoff algorithm")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Retry")]
+[assembly: AssemblyProduct("RetryMagic")]
 [assembly: AssemblyCopyright("Copyright © Jorrit Salverda 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
