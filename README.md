@@ -7,6 +7,8 @@ A c# library to retry code with a truncated binary exponential backoff algorithm
 [![Build Status](https://img.shields.io/appveyor/ci/JorritSalverda/RetryMagic.svg)](https://ci.appveyor.com/project/JorritSalverda/RetryMagic/)
 [![NuGet downloads](https://img.shields.io/nuget/dt/RetryMagic.svg)](https://www.nuget.org/packages/RetryMagic)
 [![Version](https://img.shields.io/nuget/v/RetryMagic.svg)](https://www.nuget.org/packages/RetryMagic)
+[![License](https://img.shields.io/github/license/JorritSalverda/RetryMagic.svg)](https://github.com/JorritSalverda/RetryMagic/blob/master/LICENSE)
+[![Issues](https://img.shields.io/github/issues/JorritSalverda/RetryMagic.svg)](https://github.com/JorritSalverda/JitterMagic/issues)
 
 Why?
 --------------------------------
@@ -50,4 +52,4 @@ First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). 
 
     PM> Install-Package RetryMagic
 
-RetryMagic is Copyright &copy; 2015 [Jorrit Salverda](http://blog.jorritsalverda.com/) and other contributors under the [MIT license](LICENSE.txt).
+RetryMagic is Copyright &copy; 2015 [Jorrit Salverda](http://blog.jorritsalverda.com/) and other contributors under the [MIT license](https://github.com/JorritSalverda/RetryMagic/blob/master/LICENSE).
