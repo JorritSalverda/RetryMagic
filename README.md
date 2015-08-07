@@ -1,8 +1,6 @@
 # RetryMagic
 
-What is RetryMagic?
---------------------------------
-A c# library to retry code with a truncated binary exponential backoff algorithm
+A c# library to retry code using a truncated binary exponential backoff algorithm
 
 [![Build Status](https://img.shields.io/appveyor/ci/JorritSalverda/RetryMagic.svg)](https://ci.appveyor.com/project/JorritSalverda/RetryMagic/)
 [![NuGet downloads](https://img.shields.io/nuget/dt/RetryMagic.svg)](https://www.nuget.org/packages/RetryMagic)
