@@ -10,14 +10,14 @@
     <tags>retry</tags>
     <projectUrl>https://github.com/JorritSalverda/RetryMagic/</projectUrl>
     <licenseUrl>https://github.com/JorritSalverda/RetryMagic/blob/master/LICENSE</licenseUrl>
+    <dependencies> 
+       <group>
+          <dependency id="JitterMagic" />
+       </group>
+    </dependencies>
   </metadata>
   <files>
     <file src="bin\$configuration$\$id$.dll" target="lib\net40\" />
     <file src="bin\$configuration$\$id$.pdb" target="lib\net40\" />
   </files>
-  <dependencies> 
-     <group>
-        <dependency id="JitterMagic" />
-     </group>
-  </dependencies>
 </package>
