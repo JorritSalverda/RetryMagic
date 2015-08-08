@@ -10,7 +10,7 @@ A c# library to retry code using a truncated binary exponential backoff algorith
 
 Why?
 --------------------------------
-To make more robust applications make sure to retry any external call, whether it's a database call or a web request. The truncated binary exponential backoff algorithm is used to avoid congestion and is truncated/capped by default to keep the maximum interval within reason
+To make more robust applications make sure to retry any external call, whether it's a database call or a web request. The truncated [binary exponential backoff](https://en.wikipedia.org/wiki/Exponential_backoff) algorithm is used to avoid congestion and is truncated/capped by default to keep the maximum interval within reason
 
 Usage
 --------------------------------
