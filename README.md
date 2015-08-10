@@ -21,11 +21,7 @@ Retry.Action(() => { _databaseRepository.Update(databaseObject); });
 ```
 
 ```csharp
-<<<<<<< HEAD
-Retry.Function(() => { return _databaseRepository.Get(id); });
-=======
 return Retry.Function(() => { return _databaseRepository.Get(id); });
->>>>>>> 8b4e149b7f68521865111ea9bc19fc26cbfaf21f
 ```
 
 ### Changing defaults
