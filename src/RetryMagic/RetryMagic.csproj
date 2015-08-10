@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JitterMagic, Version=1.0.0.8, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JitterMagic.1.0.0.8\lib\net45\JitterMagic.dll</HintPath>
+    <Reference Include="JitterMagic, Version=1.0.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JitterMagic.1.0.0.15\lib\net45\JitterMagic.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
