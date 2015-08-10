@@ -66,6 +66,15 @@ namespace RetryMagic.UnitTests
         }
 
         [Fact]
+        public void Function_Throws_ArgumentOutOfRangeException_If_MaximumNumberOfAttempts_Is_Less_Than_One()
+        {
+            var functionToTryMock = new Mock<Func<string>>();
+
+            // act + assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Function(functionToTryMock.Object, 0));
+        }
+
+        [Fact]
         public void Action_Returns_Result_If_Function_Succeeds_At_The_First_Attempt()
         {
             var actionToTryMock = new Mock<Action>();
@@ -121,5 +130,15 @@ namespace RetryMagic.UnitTests
 
             Assert.Equal(8, aggregateException.InnerExceptions.Count);
         }
+
+        [Fact]
+        public void Action_Throws_ArgumentOutOfRangeException_If_MaximumNumberOfAttempts_Is_Less_Than_One()
+        {
+            var actionToTryMock = new Mock<Action>();
+
+            // act + assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Action(actionToTryMock.Object, 0));
+        }
+
     }
 }

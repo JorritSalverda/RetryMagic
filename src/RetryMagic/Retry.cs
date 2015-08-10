@@ -61,6 +61,11 @@ namespace RetryMagic
         /// <returns>The result the called function will return</returns>
         public static T Function<T>(Func<T> functionToTry, int maximumNumberOfAttempts)
         {
+            if (maximumNumberOfAttempts < 1)
+            {
+                throw new ArgumentOutOfRangeException("maximumNumberOfAttempts", "Maximum number of attempts needs to be 1 or larger");
+            }
+
             var innerExceptions = new List<Exception>();
             var numberOfAttempts = 0;
 
@@ -101,6 +106,11 @@ namespace RetryMagic
         /// <param name="maximumNumberOfAttempts">An integer larger than 1</param>
         public static void Action(Action actionToTry, int maximumNumberOfAttempts)
         {
+            if (maximumNumberOfAttempts < 1)
+            {
+                throw new ArgumentOutOfRangeException("maximumNumberOfAttempts", "Maximum number of attempts needs to be 1 or larger");
+            }
+
             var innerExceptions = new List<Exception>();
             var numberOfAttempts = 0;
 

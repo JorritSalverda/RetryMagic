@@ -1,8 +1,12 @@
 # RetryMagic
 
+<<<<<<< HEAD
 What is RetryMagic?
 --------------------------------
 A c# library to retry code with a truncated binary exponential backoff algorithm
+=======
+A c# library to retry code using a truncated binary exponential backoff algorithm
+>>>>>>> 8b4e149b7f68521865111ea9bc19fc26cbfaf21f
 
 [![Build Status](https://img.shields.io/appveyor/ci/JorritSalverda/RetryMagic.svg)](https://ci.appveyor.com/project/JorritSalverda/RetryMagic/)
 [![NuGet downloads](https://img.shields.io/nuget/dt/RetryMagic.svg)](https://www.nuget.org/packages/RetryMagic)
@@ -12,7 +16,11 @@ A c# library to retry code with a truncated binary exponential backoff algorithm
 
 Why?
 --------------------------------
+<<<<<<< HEAD
 To make more robust applications make sure to retry any external call, whether it's a database call or a web request. The truncated binary exponential backoff algorithm is used to avoid congestion and is truncated/capped by default to keep the maximum interval within reason
+=======
+To make more robust applications make sure to retry any external call, whether it's a database call or a web request. The truncated [binary exponential backoff](https://en.wikipedia.org/wiki/Exponential_backoff) algorithm is used to avoid congestion and is truncated/capped by default to keep the maximum interval within reason
+>>>>>>> 8b4e149b7f68521865111ea9bc19fc26cbfaf21f
 
 Usage
 --------------------------------
@@ -23,7 +31,11 @@ Retry.Action(() => { _databaseRepository.Update(databaseObject); });
 ```
 
 ```csharp
+<<<<<<< HEAD
 Retry.Function(() => { return _databaseRepository.Get(id); });
+=======
+return Retry.Function(() => { return _databaseRepository.Get(id); });
+>>>>>>> 8b4e149b7f68521865111ea9bc19fc26cbfaf21f
 ```
 
 ### Changing defaults
@@ -52,4 +64,8 @@ First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). 
 
     PM> Install-Package RetryMagic
 
+<<<<<<< HEAD
 RetryMagic is Copyright &copy; 2015 [Jorrit Salverda](http://blog.jorritsalverda.com/) and other contributors under the [MIT license](https://github.com/JorritSalverda/RetryMagic/blob/master/LICENSE).
+=======
+RetryMagic is Copyright &copy; 2015 [Jorrit Salverda](http://blog.jorritsalverda.com/) and other contributors under the [MIT license](https://github.com/JorritSalverda/RetryMagic/blob/master/LICENSE).
+>>>>>>> 8b4e149b7f68521865111ea9bc19fc26cbfaf21f

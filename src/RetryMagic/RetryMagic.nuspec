@@ -12,7 +12,7 @@
     <licenseUrl>https://github.com/JorritSalverda/RetryMagic/blob/master/LICENSE</licenseUrl>
     <dependencies> 
        <group>
-          <dependency id="JitterMagic" />
+          <dependency id="JitterMagic" version="1.0.0.14" />
        </group>
     </dependencies>
   </metadata>
