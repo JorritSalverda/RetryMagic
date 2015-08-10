@@ -2,7 +2,7 @@
 
 A c# library to retry code using a truncated binary exponential backoff algorithm
 
-[![Build Status .NET](https://img.shields.io/appveyor/ci/JorritSalverda/RetryMagic.svg)](https://ci.appveyor.com/project/JorritSalverda/retrymagic/)
+[![Build Status .NET](https://img.shields.io/appveyor/ci/JorritSalverda/RetryMagic.svg)](https://ci.appveyor.com/project/JorritSalverda/RetryMagic/)
 [![Build Status Mono](https://img.shields.io/travis/JorritSalverda/RetryMagic.svg)](https://travis-ci.org/JorritSalverda/RetryMagic/)
 [![NuGet downloads](https://img.shields.io/nuget/dt/RetryMagic.svg)](https://www.nuget.org/packages/RetryMagic)
 [![Version](https://img.shields.io/nuget/v/RetryMagic.svg)](https://www.nuget.org/packages/RetryMagic)
