@@ -47,6 +47,26 @@ Retry.MaximumNumberOfSlotsWhenTruncated = 16;
 
 ```csharp
 Retry.JitterPercentage = 25;
+
+```
+
+### Non-static usage
+
+If you wish to be able to inject it - for example for having different settings in different places - you can use the RetryInstance class:
+
+```csharp
+IRetryInstance instance = new RetryInstance(8, 32, true, 16, 25);
+
+This interface and class only has the Action and Function methods without extra parameters besides the Action or Func<T>, because you provide those during construction.
+
+You can retry either an Action or a Func<T>
+
+```csharp
+instance.Action(() => { _databaseRepository.Update(databaseObject); });
+```
+
+```csharp
+return instance.Function(() => { return _databaseRepository.Get(id); });
 ```
 
 Get it
