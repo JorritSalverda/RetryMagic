@@ -6,7 +6,7 @@ namespace RetryMagic.UnitTests
 {
     public class RetryTests
     {
-        public class Function
+        public class FunctionMethod
         {
             [Fact]
             public void Returns_Result_If_Function_Succeeds_At_The_First_Attempt()
@@ -104,7 +104,7 @@ namespace RetryMagic.UnitTests
             }
         }
 
-        public class Action
+        public class ActionMethod
         {
             [Fact]
             public void Returns_Result_If_Function_Succeeds_At_The_First_Attempt()

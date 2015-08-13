@@ -11,44 +11,37 @@ namespace RetryMagic.UnitTests
             [Fact]
             public void Throws_ArgumentOutOfRangeException_If_MaximumNumberOfAttempts_Is_Less_Than_One()
             {
-
                 // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(new RetryInstance(0, 32, true, 16, 25));
+                Assert.Throws<ArgumentOutOfRangeException>(() => new RetryInstance(0, 32, true, 16, 25));
             }
 
             [Fact]
             public void Throws_ArgumentOutOfRangeException_If_MilliSecondsPerSlot_Is_Less_Than_One()
             {
-                var functionToTryMock = new Mock<Func<string>>();
-
                 // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(new RetryInstance(8, 0, true, 16, 25));
+                Assert.Throws<ArgumentOutOfRangeException>(() => new RetryInstance(8, 0, true, 16, 25));
             }
 
             [Fact]
             public void Throws_ArgumentOutOfRangeException_If_MaximumNumberOfSlotsWhenTruncated_Is_Less_Than_One()
             {
-                var functionToTryMock = new Mock<Func<string>>();
-
                 // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(new RetryInstance(8, 32, true, 0, 25));
+                Assert.Throws<ArgumentOutOfRangeException>(() => new RetryInstance(8, 32, true, 0, 25));
             }
 
             [Fact]
             public void Throws_ArgumentOutOfRangeException_If_JitterPercentage_Is_Less_Than_Zero()
             {
-                var functionToTryMock = new Mock<Func<string>>();
-
                 // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(new RetryInstance(8, 32, true, 16, -1));
+                Assert.Throws<ArgumentOutOfRangeException>(() => new RetryInstance(8, 32, true, 16, -1));
             }
         }
 
-        public class Function
+        public class FunctionMethod
         {
             private readonly IRetryInstance instance;
 
-            public Function()
+            public FunctionMethod()
             {
                 instance = new RetryInstance(8, 32, true, 16, 25);
             }
@@ -115,11 +108,11 @@ namespace RetryMagic.UnitTests
 
         }
 
-        public class Action
+        public class ActionMethod
         {
             private readonly IRetryInstance instance;
 
-            public Action()
+            public ActionMethod()
             {
                 instance = new RetryInstance(8, 32, true, 16, 25);
             }
