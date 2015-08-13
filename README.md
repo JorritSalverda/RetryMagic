@@ -34,15 +34,19 @@ Retry.DefaultMaximumNumberOfAttempts = 8;
 ```
 
 ```csharp
-Retry.MilliSecondsPerSlot = 32;
+Retry.MillisecondsPerSlot = 32;
 ```
 
 ```csharp
-Retry.Truncate = true;
+Retry.TruncateNumberOfSlots = true;
 ```
 
 ```csharp
 Retry.MaximumNumberOfSlotsWhenTruncated = 16;
+```
+
+```csharp
+Retry.JitterPercentage = 25;
 ```
 
 Get it
