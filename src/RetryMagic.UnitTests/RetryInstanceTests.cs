@@ -65,14 +65,13 @@ namespace RetryMagic.UnitTests
                 var functionToTryMock = new Mock<Func<string>>();
                 var calls = 0;
                 functionToTryMock.Setup(x => x()).Returns("value")
-                    .Callback(() =>
-                        {
-                            calls++;
-                            if (calls == 1)
-                            {
-                                throw new Exception();
-                            }
-                        });
+                    .Callback(() => {
+                    calls++;
+                    if (calls == 1)
+                    {
+                        throw new Exception();
+                    }
+                });
 
                 // act
                 string value = instance.Function(functionToTryMock.Object);
@@ -135,14 +134,13 @@ namespace RetryMagic.UnitTests
                 var actionToTryMock = new Mock<Action>();
                 var calls = 0;
                 actionToTryMock.Setup(x => x())
-                    .Callback(() =>
-                        {
-                            calls++;
-                            if (calls == 1)
-                            {
-                                throw new Exception();
-                            }
-                        });
+                    .Callback(() => {
+                    calls++;
+                    if (calls == 1)
+                    {
+                        throw new Exception();
+                    }
+                });
 
                 // act
                 instance.Action(actionToTryMock.Object);
@@ -173,6 +171,6 @@ namespace RetryMagic.UnitTests
 
                 Assert.Equal(8, aggregateException.InnerExceptions.Count);
             }
-        }    
+        }
     }
 }

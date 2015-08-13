@@ -27,14 +27,13 @@ namespace RetryMagic.UnitTests
                 var functionToTryMock = new Mock<Func<string>>();
                 var calls = 0;
                 functionToTryMock.Setup(x => x()).Returns("value")
-                    .Callback(() =>
-                        {
-                            calls++;
-                            if (calls == 1)
-                            {
-                                throw new Exception();
-                            }
-                        });
+                    .Callback(() => {
+                    calls++;
+                    if (calls == 1)
+                    {
+                        throw new Exception();
+                    }
+                });
 
                 // act
                 string value = Retry.Function(functionToTryMock.Object);
@@ -124,14 +123,13 @@ namespace RetryMagic.UnitTests
                 var actionToTryMock = new Mock<Action>();
                 var calls = 0;
                 actionToTryMock.Setup(x => x())
-                    .Callback(() =>
-                        {
-                            calls++;
-                            if (calls == 1)
-                            {
-                                throw new Exception();
-                            }
-                        });
+                    .Callback(() => {
+                    calls++;
+                    if (calls == 1)
+                    {
+                        throw new Exception();
+                    }
+                });
 
                 // act
                 Retry.Action(actionToTryMock.Object);
@@ -198,6 +196,6 @@ namespace RetryMagic.UnitTests
                 // act + assert
                 Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Action(actionToTryMock.Object, 8, 32, true, 16, -1));
             }
-        }        
+        }
     }
 }

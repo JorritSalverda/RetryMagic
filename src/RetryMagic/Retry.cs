@@ -72,7 +72,7 @@ namespace RetryMagic
         /// <returns>The result the called function will return.</returns>
         public static T Function<T>(Func<T> functionToTry, int maximumNumberOfAttempts, int millisecondsPerSlot, bool truncateNumberOfSlots, int maximumNumberOfSlotsWhenTruncated, int jitterPercentage)
         {
-            ValidateParameters (maximumNumberOfAttempts, millisecondsPerSlot, truncateNumberOfSlots, maximumNumberOfSlotsWhenTruncated, jitterPercentage);
+            ValidateParameters(maximumNumberOfAttempts, millisecondsPerSlot, truncateNumberOfSlots, maximumNumberOfSlotsWhenTruncated, jitterPercentage);
 
             var innerExceptions = new List<Exception>();
             var numberOfAttempts = 0;
@@ -118,7 +118,7 @@ namespace RetryMagic
         /// <param name="jitterPercentage">Jitter percentage.</param>
         public static void Action(Action actionToTry, int maximumNumberOfAttempts, int millisecondsPerSlot, bool truncateNumberOfSlots, int maximumNumberOfSlotsWhenTruncated, int jitterPercentage)
         {
-            ValidateParameters (maximumNumberOfAttempts, millisecondsPerSlot, truncateNumberOfSlots, maximumNumberOfSlotsWhenTruncated, jitterPercentage);
+            ValidateParameters(maximumNumberOfAttempts, millisecondsPerSlot, truncateNumberOfSlots, maximumNumberOfSlotsWhenTruncated, jitterPercentage);
 
             var innerExceptions = new List<Exception>();
             var numberOfAttempts = 0;

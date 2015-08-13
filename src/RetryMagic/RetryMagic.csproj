@@ -38,7 +38,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="JitterMagic">
-      <HintPath>..\packages\JitterMagic.1.0.0.26\lib\net45\JitterMagic.dll</HintPath>
+      <HintPath>..\packages\JitterMagic.1.0.0.27\lib\net45\JitterMagic.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
