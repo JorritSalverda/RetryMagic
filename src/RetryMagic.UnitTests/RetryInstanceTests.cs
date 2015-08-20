@@ -94,7 +94,7 @@ namespace RetryMagic.UnitTests
                 // act + assert
                 Assert.Throws<AggregateException>(() => instance.Function(functionToTryMock.Object));
 
-                functionToTryMock.Verify(x => x(), Times.Exactly(8));
+                functionToTryMock.Verify(x => x(), Times.Exactly(5));
             }
 
             [Fact]
