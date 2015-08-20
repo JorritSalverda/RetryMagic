@@ -86,27 +86,27 @@ namespace RetryMagic.UnitTests
             }
 
             [Fact]
-            public void Throws_Aggregate_Exception_If_Function_Fails_For_Maximum_Attempts()
+            public void Throws_RetryException_If_Function_Fails_For_Maximum_Attempts()
             {
                 var functionToTryMock = new Mock<Func<string>>();
                 functionToTryMock.Setup(x => x()).Throws<Exception>();
 
                 // act + assert
-                Assert.Throws<AggregateException>(() => instance.Function(functionToTryMock.Object));
+                Assert.Throws<RetryException>(() => instance.Function(functionToTryMock.Object));
 
                 functionToTryMock.Verify(x => x(), Times.Exactly(5));
             }
 
             [Fact]
-            public void Throws_Aggregate_Exception_With_Each_Thrown_Exception_As_Inner_Exception_If_Function_Fails_For_Maximum_Attempts()
+            public void Throws_RetryException_With_Each_Thrown_Exception_As_Inner_Exception_If_Function_Fails_For_Maximum_Attempts()
             {
                 var functionToTryMock = new Mock<Func<string>>();
                 functionToTryMock.Setup(x => x()).Throws<Exception>();
 
                 // act + assert
-                var aggregateException = Assert.Throws<AggregateException>(() => instance.Function(functionToTryMock.Object));
+                var retryException = Assert.Throws<RetryException>(() => instance.Function(functionToTryMock.Object));
 
-                Assert.Equal(5, aggregateException.InnerExceptions.Count);
+                Assert.Equal(5, retryException.InnerExceptions.Count);
             }
 
 
@@ -154,27 +154,27 @@ namespace RetryMagic.UnitTests
             }
 
             [Fact]
-            public void Throws_Aggregate_Exception_If_Function_Fails_For_Maximum_Attempts()
+            public void Throws_RetryException_If_Function_Fails_For_Maximum_Attempts()
             {
                 var actionToTryMock = new Mock<Action>();
                 actionToTryMock.Setup(x => x()).Throws<Exception>();
 
                 // act + assert
-                Assert.Throws<AggregateException>(() => instance.Action(actionToTryMock.Object));
+                Assert.Throws<RetryException>(() => instance.Action(actionToTryMock.Object));
 
                 actionToTryMock.Verify(x => x(), Times.Exactly(5));
             }
 
             [Fact]
-            public void Throws_Aggregate_Exception_With_Each_Thrown_Exception_As_Inner_Exception_If_Function_Fails_For_Maximum_Attempts()
+            public void Throws_RetryException_With_Each_Thrown_Exception_As_Inner_Exception_If_Function_Fails_For_Maximum_Attempts()
             {
                 var actionToTryMock = new Mock<Action>();
                 actionToTryMock.Setup(x => x()).Throws<Exception>();
 
                 // act + assert
-                var aggregateException = Assert.Throws<AggregateException>(() => instance.Action(actionToTryMock.Object));
+                var retryException = Assert.Throws<RetryException>(() => instance.Action(actionToTryMock.Object));
 
-                Assert.Equal(5, aggregateException.InnerExceptions.Count);
+                Assert.Equal(5, retryException.InnerExceptions.Count);
             }
         }
     }

@@ -53,7 +53,7 @@
       <HintPath>..\packages\xunit.extensibility.core.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
     </Reference>
     <Reference Include="JitterMagic">
-      <HintPath>..\packages\JitterMagic.1.0.0.30\lib\net45\JitterMagic.dll</HintPath>
+      <HintPath>..\packages\JitterMagic.1.0.0.32\lib\net45\JitterMagic.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

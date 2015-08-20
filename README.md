@@ -38,6 +38,8 @@ Retry.UpdateSettings(new RetrySettings(
 	maximumNumberOfSlotsWhenTruncated: 16));
 ```
 
+Validation of settings always takes place during construction of the object so it fails as early as possible.
+
 ### Non-static usage
 
 If you wish to be able to inject it - for example for having different settings in different places - you can use the `RetryInstance` class:

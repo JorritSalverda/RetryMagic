@@ -84,7 +84,7 @@ namespace RetryMagic
             }
 
             var exceptionMessage = string.Format("Trying function {0} failed for {1} attempts.", functionToTry, settings.MaximumNumberOfAttempts);
-            throw new AggregateException(exceptionMessage, innerExceptions);
+            throw new RetryException(exceptionMessage, innerExceptions);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace RetryMagic
             }
 
             var exceptionMessage = string.Format("Trying action {0} failed for {1} attempts.", actionToTry, settings.MaximumNumberOfAttempts);
-            throw new AggregateException(exceptionMessage, innerExceptions);
+            throw new RetryException(exceptionMessage, innerExceptions);
         }
 
         /// <summary>
