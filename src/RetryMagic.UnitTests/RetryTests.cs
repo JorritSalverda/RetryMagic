@@ -6,6 +6,25 @@ namespace RetryMagic.UnitTests
 {
     public class RetryTests
     {
+        public class UpdateSettings
+        {
+            [Fact]
+            public void Throws_ArgumentNullException_If_Settings_Is_Null()
+            {
+                // act + assert
+                Assert.Throws<ArgumentNullException>(() => Retry.UpdateSettings(null));
+            }
+
+            [Fact]
+            public void Updates_Settings_Property()
+            {
+                // act
+                Retry.UpdateSettings(new RetrySettings(maximumNumberOfAttempts: 10));
+
+                Assert.Equal(10, Retry.Settings.MaximumNumberOfAttempts);
+            }
+        }
+
         public class FunctionMethod
         {
             [Fact]
@@ -67,39 +86,12 @@ namespace RetryMagic.UnitTests
             }
 
             [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_MaximumNumberOfAttempts_Is_Less_Than_One()
+            public void Throws_ArgumentNullException_If_Settings_Is_Null()
             {
                 var functionToTryMock = new Mock<Func<string>>();
 
                 // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Function(functionToTryMock.Object, 0, 32, true, 16, 25));
-            }
-
-            [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_MilliSecondsPerSlot_Is_Less_Than_One()
-            {
-                var functionToTryMock = new Mock<Func<string>>();
-
-                // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Function(functionToTryMock.Object, 8, 0, true, 16, 25));
-            }
-
-            [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_MaximumNumberOfSlotsWhenTruncated_Is_Less_Than_One()
-            {
-                var functionToTryMock = new Mock<Func<string>>();
-
-                // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Function(functionToTryMock.Object, 8, 32, true, 0, 25));
-            }
-
-            [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_JitterPercentage_Is_Less_Than_Zero()
-            {
-                var functionToTryMock = new Mock<Func<string>>();
-
-                // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Function(functionToTryMock.Object, 8, 32, true, 16, -1));
+                Assert.Throws<ArgumentNullException>(() => Retry.Function(functionToTryMock.Object, null));
             }
         }
 
@@ -162,39 +154,12 @@ namespace RetryMagic.UnitTests
             }
 
             [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_MaximumNumberOfAttempts_Is_Less_Than_One()
+            public void Throws_ArgumentNullException_If_Settings_Is_Null()
             {
                 var actionToTryMock = new Mock<Action>();
 
                 // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Action(actionToTryMock.Object, 0, 32, true, 16, 25));
-            }
-
-            [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_MilliSecondsPerSlot_Is_Less_Than_One()
-            {
-                var actionToTryMock = new Mock<Action>();
-
-                // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Action(actionToTryMock.Object, 8, 0, true, 16, 25));
-            }
-
-            [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_MaximumNumberOfSlotsWhenTruncated_Is_Less_Than_One()
-            {
-                var actionToTryMock = new Mock<Action>();
-
-                // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Action(actionToTryMock.Object, 8, 32, true, 0, 25));
-            }
-
-            [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_JitterPercentage_Is_Less_Than_Zero()
-            {
-                var actionToTryMock = new Mock<Action>();
-
-                // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => Retry.Action(actionToTryMock.Object, 8, 32, true, 16, -1));
+                Assert.Throws<ArgumentNullException>(() => Retry.Action(actionToTryMock.Object, null));
             }
         }
     }

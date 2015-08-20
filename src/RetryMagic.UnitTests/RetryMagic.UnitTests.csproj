@@ -52,11 +52,15 @@
     <Reference Include="xunit.core, Version=2.0.0.2929, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
       <HintPath>..\packages\xunit.extensibility.core.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
     </Reference>
+    <Reference Include="JitterMagic">
+      <HintPath>..\packages\JitterMagic.1.0.0.30\lib\net45\JitterMagic.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetryTests.cs" />
     <Compile Include="RetryInstanceTests.cs" />
+    <Compile Include="RetrySettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RetryMagic\RetryMagic.csproj">

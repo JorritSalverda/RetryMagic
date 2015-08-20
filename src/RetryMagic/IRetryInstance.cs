@@ -8,6 +8,18 @@ namespace RetryMagic
     public interface IRetryInstance
     {
         /// <summary>
+        /// Settings for this instance.
+        /// </summary>
+        /// <value>The settings.</value>
+        RetrySettings Settings { get; }
+
+        /// <summary>
+        /// Updates the settings.
+        /// </summary>
+        /// <param name="settings">Settings.</param>
+        void UpdateSettings(RetrySettings settings);
+
+        /// <summary>
         /// Retry a function using the values provided in the constructor.
         /// </summary>
         /// <typeparam name="T">The generic type of the result</typeparam>

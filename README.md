@@ -27,26 +27,10 @@ return Retry.Function(() => { return _databaseRepository.Get(id); });
 
 ### Changing defaults
 
-The following defaults are used and can be changed by using the following code with different values
+The following default settings are used and can be changed by using the following code with different values
 
 ```csharp
-Retry.DefaultMaximumNumberOfAttempts = 8;
-```
-
-```csharp
-Retry.MillisecondsPerSlot = 32;
-```
-
-```csharp
-Retry.TruncateNumberOfSlots = true;
-```
-
-```csharp
-Retry.MaximumNumberOfSlotsWhenTruncated = 16;
-```
-
-```csharp
-Retry.JitterPercentage = 25;
+Retry.UpdateSettings(new RetrySettings(jitterSettings:new JitterSettings(percentage:25), maximumNumberOfAttempts:5, millisecondsPerSlot:32, truncateNumberOfSlots:true, maximumNumberOfSlotsWhenTruncated:16));
 
 ```
 
@@ -55,9 +39,9 @@ Retry.JitterPercentage = 25;
 If you wish to be able to inject it - for example for having different settings in different places - you can use the RetryInstance class:
 
 ```csharp
-IRetryInstance instance = new RetryInstance(8, 32, true, 16, 25);
+IRetryInstance instance = new RetryInstance(new RetrySettings(jitterSettings:new JitterSettings(percentage:25), maximumNumberOfAttempts:5, millisecondsPerSlot:32, truncateNumberOfSlots:true, maximumNumberOfSlotsWhenTruncated:16));
 
-This interface and class only has the Action and Function methods without extra parameters besides the Action or Func<T>, because you provide those during construction.
+This interface and class only has the Action and Function methods without the settings parameter besides the Action or Func<T>, because you provide those during construction.
 
 You can retry either an Action or a Func<T>
 

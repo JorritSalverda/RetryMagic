@@ -11,41 +11,31 @@ namespace RetryMagic
     public static class Retry
     {
         /// <summary>
-        /// Determines the maximum number of attempts to retry for.
+        /// Gets the settings.
         /// </summary>
-        public static int DefaultMaximumNumberOfAttempts { get; set; }
+        /// <value>The settings.</value>
+        public static RetrySettings Settings { get; private set; }
 
         /// <summary>
-        /// With each attempt the amount of slots doubles; this is the time per slot.
-        /// </summary>
-        public static int MillisecondsPerSlot { get; set; }
-
-        /// <summary>
-        /// Determines whether the exponential backoff truncates or continuous to expand.
-        /// </summary>
-        public static bool TruncateNumberOfSlots { get; set; }
-
-        /// <summary>
-        /// If <see cref="Truncate"/> is true this maximizes the number of slots.
-        /// </summary>
-        public static int MaximumNumberOfSlotsWhenTruncated { get; set; }
-
-        /// <summary>
-        /// Gets or sets the jitter percentage used for applying jitter to the retry interval.
-        /// </summary>
-        /// <value>The jitter percentage.</value>
-        public static int JitterPercentage { get; set; }
-
-        /// <summary>
-        /// Initialize the DefaultMaximumNumberOfAttempts; it can be overriden by the consumer of this class at application startup.
+        /// Initialize the default settings; it can be overriden by the consumer of this class at application startup.
         /// </summary>
         static Retry()
         {
-            DefaultMaximumNumberOfAttempts = 8;
-            MillisecondsPerSlot = 32;
-            TruncateNumberOfSlots = true;
-            MaximumNumberOfSlotsWhenTruncated = 16;
-            JitterPercentage = 25;
+            Settings = new RetrySettings();
+        }
+
+        /// <summary>
+        /// Updates the settings.
+        /// </summary>
+        /// <param name="settings">Settings.</param>
+        public static void UpdateSettings(RetrySettings settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
+            Settings = settings;
         }
 
         /// <summary>
@@ -56,7 +46,7 @@ namespace RetryMagic
         /// <returns>The result the called function will return.</returns>
         public static T Function<T>(Func<T> functionToTry)
         {
-            return Function(functionToTry, DefaultMaximumNumberOfAttempts, MillisecondsPerSlot, TruncateNumberOfSlots, MaximumNumberOfSlotsWhenTruncated, JitterPercentage);
+            return Function(functionToTry, Settings);
         }
 
         /// <summary>
@@ -64,20 +54,19 @@ namespace RetryMagic
         /// </summary>
         /// <typeparam name="T">The generic type of the result.</typeparam>
         /// <param name="functionToTry">Any function with a return value; for a function with parameters use a lambda expression.</param>
-        /// <param name="maximumNumberOfAttempts">Maximum number of attempts.</param>
-        /// <param name="millisecondsPerSlot">Milliseconds per slot.</param>
-        /// <param name="truncate">If set to <c>true</c> truncate the number of slots.</param>
-        /// <param name="maximumNumberOfSlotsWhenTruncated">Maximum number of slots when <see cref="truncate"/> is set to <c>true</c>.</param>
-        /// <param name="jitterPercentage">Jitter percentage.</param>
+        /// <param name="settings">Object that contain settings.</param>
         /// <returns>The result the called function will return.</returns>
-        public static T Function<T>(Func<T> functionToTry, int maximumNumberOfAttempts, int millisecondsPerSlot, bool truncateNumberOfSlots, int maximumNumberOfSlotsWhenTruncated, int jitterPercentage)
+        public static T Function<T>(Func<T> functionToTry, RetrySettings settings)
         {
-            ValidateParameters(maximumNumberOfAttempts, millisecondsPerSlot, truncateNumberOfSlots, maximumNumberOfSlotsWhenTruncated, jitterPercentage);
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
 
             var innerExceptions = new List<Exception>();
             var numberOfAttempts = 0;
 
-            while (numberOfAttempts < maximumNumberOfAttempts)
+            while (numberOfAttempts < settings.MaximumNumberOfAttempts)
             {
                 try
                 {
@@ -88,13 +77,13 @@ namespace RetryMagic
                 catch (Exception exception)
                 {
                     innerExceptions.Add(exception);
-                    Thread.Sleep(GetIntervalInMilliseconds(numberOfAttempts, millisecondsPerSlot, truncateNumberOfSlots, maximumNumberOfSlotsWhenTruncated, jitterPercentage));
+                    Thread.Sleep(GetIntervalInMilliseconds(numberOfAttempts, settings));
                 }
 
                 numberOfAttempts++;
             }
 
-            var exceptionMessage = string.Format("Trying function {0} failed for {1} attempts.", functionToTry, maximumNumberOfAttempts);
+            var exceptionMessage = string.Format("Trying function {0} failed for {1} attempts.", functionToTry, settings.MaximumNumberOfAttempts);
             throw new AggregateException(exceptionMessage, innerExceptions);
         }
 
@@ -104,26 +93,25 @@ namespace RetryMagic
         /// <param name="actionToTry">Any action.</param>
         public static void Action(Action actionToTry)
         {
-            Action(actionToTry, DefaultMaximumNumberOfAttempts, MillisecondsPerSlot, TruncateNumberOfSlots, MaximumNumberOfSlotsWhenTruncated, JitterPercentage);
+            Action(actionToTry, Settings);
         }
 
         /// <summary>
         /// Retry an action with passed in settings.
         /// </summary>
         /// <param name="actionToTry">Any action.</param>
-        /// <param name="maximumNumberOfAttempts">Maximum number of attempts.</param>
-        /// <param name="millisecondsPerSlot">Milliseconds per slot.</param>
-        /// <param name="truncate">If set to <c>true</c> truncate the number of slots.</param>
-        /// <param name="maximumNumberOfSlotsWhenTruncated">Maximum number of slots when <see cref="truncate"/> is set to <c>true</c>.</param>
-        /// <param name="jitterPercentage">Jitter percentage.</param>
-        public static void Action(Action actionToTry, int maximumNumberOfAttempts, int millisecondsPerSlot, bool truncateNumberOfSlots, int maximumNumberOfSlotsWhenTruncated, int jitterPercentage)
+        /// <param name="settings">Object that contain settings.</param>
+        public static void Action(Action actionToTry, RetrySettings settings)
         {
-            ValidateParameters(maximumNumberOfAttempts, millisecondsPerSlot, truncateNumberOfSlots, maximumNumberOfSlotsWhenTruncated, jitterPercentage);
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
 
             var innerExceptions = new List<Exception>();
             var numberOfAttempts = 0;
 
-            while (numberOfAttempts < maximumNumberOfAttempts)
+            while (numberOfAttempts < settings.MaximumNumberOfAttempts)
             {
                 try
                 {
@@ -134,13 +122,13 @@ namespace RetryMagic
                 catch (Exception exception)
                 {
                     innerExceptions.Add(exception);
-                    Thread.Sleep(GetIntervalInMilliseconds(numberOfAttempts, millisecondsPerSlot, truncateNumberOfSlots, maximumNumberOfSlotsWhenTruncated, jitterPercentage));
+                    Thread.Sleep(GetIntervalInMilliseconds(numberOfAttempts, settings));
                 }
 
                 numberOfAttempts++;
             }
 
-            var exceptionMessage = string.Format("Trying action {0} failed for {1} attempts.", actionToTry, maximumNumberOfAttempts);
+            var exceptionMessage = string.Format("Trying action {0} failed for {1} attempts.", actionToTry, settings.MaximumNumberOfAttempts);
             throw new AggregateException(exceptionMessage, innerExceptions);
         }
 
@@ -148,50 +136,19 @@ namespace RetryMagic
         /// Per attempt the number of slots doubles; the number of slots either continuous to rise or is truncate if <see cref="Truncate"/> is true and the slots grow passed MaximumNumberOfSlotsWhenTruncated.
         /// </summary>
         /// <returns>The interval in milliseconds.</returns>
-        /// <param name="numberOfAttempts">The xth attempt.</param>
-        /// <param name="millisecondsPerSlot">Milli seconds per slot.</param>
-        /// <param name="truncate">If set to <c>true</c> truncate the number of slots.</param>
-        /// <param name="maximumNumberOfSlotsWhenTruncated">Maximum number of slots when <see cref="truncate"/> is set to <c>true</c>.</param>
-        /// <param name="jitterPercentage">Jitter percentage.</param>
-        private static int GetIntervalInMilliseconds(int numberOfAttempts, int millisecondsPerSlot, bool truncate, int maximumNumberOfSlotsWhenTruncated, int jitterPercentage)
+        /// <param name="numberOfAttempt">The xth attempt.</param>
+        /// <param name="settings">Object that contain settings.</param>
+        private static int GetIntervalInMilliseconds(int numberOfAttempt, RetrySettings settings)
         {
             // binary exponential backoff
-            var numberOfSlots = Math.Pow(2, numberOfAttempts) - 1;
+            var numberOfSlots = Math.Pow(2, numberOfAttempt) - 1;
 
             // truncate if Truncate is true, otherwise cap at int.MaxValue
-            var maximumNumberOfSlots = truncate ? maximumNumberOfSlotsWhenTruncated : int.MaxValue;
+            var maximumNumberOfSlots = settings.TruncateNumberOfSlots ? settings.MaximumNumberOfSlotsWhenTruncated : int.MaxValue;
             var numberOfSlotsAsInteger = numberOfSlots > maximumNumberOfSlots ? maximumNumberOfSlots : (int)numberOfSlots;
 
             // multiply slots times MilliSecondsPerSlot; apply jitter to the resulting time in order to increase entropy in your system
-            return Jitter.Apply(numberOfSlotsAsInteger * millisecondsPerSlot, jitterPercentage);
-        }
-
-        /// <summary>
-        /// Validates the parameters.
-        /// </summary>
-        /// <param name="maximumNumberOfAttempts">Maximum number of attempts.</param>
-        /// <param name="millisecondsPerSlot">Milliseconds per slot.</param>
-        /// <param name="truncate">If set to <c>true</c> truncate the number of slots.</param>
-        /// <param name="maximumNumberOfSlotsWhenTruncated">Maximum number of slots when <see cref="truncate"/> is set to <c>true</c>.</param>
-        /// <param name="jitterPercentage">Jitter percentage.</param>
-        internal static void ValidateParameters(int maximumNumberOfAttempts, int millisecondsPerSlot, bool truncateNumberOfSlots, int maximumNumberOfSlotsWhenTruncated, int jitterPercentage)
-        {
-            if (maximumNumberOfAttempts < 1)
-            {
-                throw new ArgumentOutOfRangeException("maximumNumberOfAttempts", "Maximum number of attempts needs to be 1 or larger");
-            }
-            if (millisecondsPerSlot < 1)
-            {
-                throw new ArgumentOutOfRangeException("milliSecondsPerSlot", "Milliseconds per slot needs to be 1 or larger");
-            }
-            if (maximumNumberOfSlotsWhenTruncated < 1)
-            {
-                throw new ArgumentOutOfRangeException("maximumNumberOfSlotsWhenTruncated", "Maximum number of slots when truncated needs to be 1 or larger");
-            }
-            if (jitterPercentage < 0)
-            {
-                throw new ArgumentOutOfRangeException("jitterPercentage", "Jitter percentage needs to be 0 or larger");
-            }
+            return Jitter.Apply(numberOfSlotsAsInteger * settings.MillisecondsPerSlot, settings.JitterSettings);
         }
     }
 }

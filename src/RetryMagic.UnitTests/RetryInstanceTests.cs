@@ -9,31 +9,36 @@ namespace RetryMagic.UnitTests
         public class Constructor
         {
             [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_MaximumNumberOfAttempts_Is_Less_Than_One()
+            public void Throws_ArgumentNullException_If_Settings_Is_Null()
             {
                 // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => new RetryInstance(0, 32, true, 16, 25));
+                Assert.Throws<ArgumentNullException>(() => new RetryInstance(null));
+            }
+        }
+
+        public class UpdateSettings
+        {
+            private readonly IRetryInstance instance;
+
+            public UpdateSettings()
+            {
+                instance = new RetryInstance(new RetrySettings());
             }
 
             [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_MilliSecondsPerSlot_Is_Less_Than_One()
+            public void Throws_ArgumentNullException_If_Settings_Is_Null()
             {
                 // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => new RetryInstance(8, 0, true, 16, 25));
+                Assert.Throws<ArgumentNullException>(() => instance.UpdateSettings(null));
             }
 
             [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_MaximumNumberOfSlotsWhenTruncated_Is_Less_Than_One()
+            public void Updates_Settings_Property()
             {
-                // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => new RetryInstance(8, 32, true, 0, 25));
-            }
+                // act
+                instance.UpdateSettings(new RetrySettings(maximumNumberOfAttempts: 10));
 
-            [Fact]
-            public void Throws_ArgumentOutOfRangeException_If_JitterPercentage_Is_Less_Than_Zero()
-            {
-                // act + assert
-                Assert.Throws<ArgumentOutOfRangeException>(() => new RetryInstance(8, 32, true, 16, -1));
+                Assert.Equal(10, instance.Settings.MaximumNumberOfAttempts);
             }
         }
 
@@ -43,7 +48,7 @@ namespace RetryMagic.UnitTests
 
             public FunctionMethod()
             {
-                instance = new RetryInstance(8, 32, true, 16, 25);
+                instance = new RetryInstance(new RetrySettings());
             }
 
             [Fact]
@@ -113,7 +118,7 @@ namespace RetryMagic.UnitTests
 
             public ActionMethod()
             {
-                instance = new RetryInstance(8, 32, true, 16, 25);
+                instance = new RetryInstance(new RetrySettings());
             }
 
             [Fact]
