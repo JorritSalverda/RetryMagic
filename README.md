@@ -15,7 +15,7 @@ To make more robust applications make sure to retry any external call, whether i
 
 Usage
 --------------------------------
-You can retry either an Action or a Func<T>
+You can retry either an Action or a `Func<T>`
 
 ```csharp
 Retry.Action(() => { _databaseRepository.Update(databaseObject); });
@@ -31,11 +31,11 @@ The following default settings are used and can be changed by using the followin
 
 ```csharp
 Retry.UpdateSettings(new RetrySettings(
-	jitterSettings:new JitterSettings(percentage:25), 
-	maximumNumberOfAttempts:5, 
-	millisecondsPerSlot:32, 
-	truncateNumberOfSlots:true, 
-	maximumNumberOfSlotsWhenTruncated:16));
+	jitterSettings: new JitterSettings(percentage: 25), 
+	maximumNumberOfAttempts: 5, 
+	millisecondsPerSlot: 32, 
+	truncateNumberOfSlots: true, 
+	maximumNumberOfSlotsWhenTruncated: 16));
 
 ```
 
@@ -45,15 +45,15 @@ If you wish to be able to inject it - for example for having different settings 
 
 ```csharp
 IRetryInstance instance = new RetryInstance(new RetrySettings(
-	jitterSettings:new JitterSettings(percentage:25), 
-	maximumNumberOfAttempts:5, 
-	millisecondsPerSlot:32, 
-	truncateNumberOfSlots:true, 
-	maximumNumberOfSlotsWhenTruncated:16));
+	jitterSettings:new JitterSettings(percentage: 25), 
+	maximumNumberOfAttempts: 5, 
+	millisecondsPerSlot: 32, 
+	truncateNumberOfSlots: true, 
+	maximumNumberOfSlotsWhenTruncated: 16));
 
 This interface and class only has the Action and Function methods without the settings parameter besides the Action or Func<T>, because you provide those during construction.
 
-You can retry either an Action or a Func<T>
+You can retry either an Action or a `Func<T>`
 
 ```csharp
 instance.Action(() => { _databaseRepository.Update(databaseObject); });
