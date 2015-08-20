@@ -15,7 +15,7 @@ To make more robust applications make sure to retry any external call, whether i
 
 Usage
 --------------------------------
-You can retry either an Action or a `Func<T>`
+You can retry either an `Action` or a `Func<T>`
 
 ```csharp
 Retry.Action(() => { _databaseRepository.Update(databaseObject); });
@@ -41,7 +41,7 @@ Retry.UpdateSettings(new RetrySettings(
 
 ### Non-static usage
 
-If you wish to be able to inject it - for example for having different settings in different places - you can use the RetryInstance class:
+If you wish to be able to inject it - for example for having different settings in different places - you can use the `RetryInstance` class:
 
 ```csharp
 IRetryInstance instance = new RetryInstance(new RetrySettings(
@@ -53,7 +53,7 @@ IRetryInstance instance = new RetryInstance(new RetrySettings(
 
 This interface and class only has the Action and Function methods without the settings parameter besides the Action or Func<T>, because you provide those during construction.
 
-You can retry either an Action or a `Func<T>`
+You can retry either an `Action` or a `Func<T>`
 
 ```csharp
 instance.Action(() => { _databaseRepository.Update(databaseObject); });
