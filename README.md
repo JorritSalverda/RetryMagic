@@ -36,7 +36,6 @@ Retry.UpdateSettings(new RetrySettings(
 	millisecondsPerSlot: 32, 
 	truncateNumberOfSlots: true, 
 	maximumNumberOfSlotsWhenTruncated: 16));
-
 ```
 
 ### Non-static usage
@@ -50,6 +49,7 @@ IRetryInstance instance = new RetryInstance(new RetrySettings(
 	millisecondsPerSlot: 32, 
 	truncateNumberOfSlots: true, 
 	maximumNumberOfSlotsWhenTruncated: 16));
+```
 
 This interface and class only has the Action and Function methods without the settings parameter besides the Action or Func<T>, because you provide those during construction.
 
