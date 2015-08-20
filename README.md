@@ -53,8 +53,6 @@ IRetryInstance instance = new RetryInstance(new RetrySettings(
 
 This interface and class only has the Action and Function methods without the settings parameter besides the `Action` or `Func<T>`, because you provide those during construction.
 
-You can retry either an `Action` or a `Func<T>`
-
 ```csharp
 instance.Action(() => { _databaseRepository.Update(databaseObject); });
 ```
