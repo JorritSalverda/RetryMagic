@@ -27,6 +27,11 @@ namespace RetryMagic.UnitTests
 
         public class FunctionMethod
         {
+            public FunctionMethod()
+            {
+                Retry.UpdateSettings(new RetrySettings(maximumNumberOfAttempts:5));
+            }
+
             [Fact]
             public void Returns_Result_If_Function_Succeeds_At_The_First_Attempt()
             {
@@ -70,7 +75,7 @@ namespace RetryMagic.UnitTests
                 // act + assert
                 Assert.Throws<AggregateException>(() => Retry.Function(functionToTryMock.Object));
 
-                functionToTryMock.Verify(x => x(), Times.Exactly(8));
+                functionToTryMock.Verify(x => x(), Times.Exactly(5));
             }
 
             [Fact]
@@ -82,7 +87,7 @@ namespace RetryMagic.UnitTests
                 // act + assert
                 var aggregateException = Assert.Throws<AggregateException>(() => Retry.Function(functionToTryMock.Object));
 
-                Assert.Equal(8, aggregateException.InnerExceptions.Count);
+                Assert.Equal(5, aggregateException.InnerExceptions.Count);
             }
 
             [Fact]
@@ -97,6 +102,11 @@ namespace RetryMagic.UnitTests
 
         public class ActionMethod
         {
+            public ActionMethod()
+            {
+                Retry.UpdateSettings(new RetrySettings(maximumNumberOfAttempts:5));
+            }
+
             [Fact]
             public void Returns_Result_If_Function_Succeeds_At_The_First_Attempt()
             {
@@ -138,7 +148,7 @@ namespace RetryMagic.UnitTests
                 // act + assert
                 Assert.Throws<AggregateException>(() => Retry.Action(actionToTryMock.Object));
 
-                actionToTryMock.Verify(x => x(), Times.Exactly(8));
+                actionToTryMock.Verify(x => x(), Times.Exactly(5));
             }
 
             [Fact]
@@ -150,7 +160,7 @@ namespace RetryMagic.UnitTests
                 // act + assert
                 var aggregateException = Assert.Throws<AggregateException>(() => Retry.Action(actionToTryMock.Object));
 
-                Assert.Equal(8, aggregateException.InnerExceptions.Count);
+                Assert.Equal(5, aggregateException.InnerExceptions.Count);
             }
 
             [Fact]

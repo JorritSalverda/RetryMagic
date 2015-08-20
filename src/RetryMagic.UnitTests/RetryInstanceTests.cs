@@ -48,7 +48,7 @@ namespace RetryMagic.UnitTests
 
             public FunctionMethod()
             {
-                instance = new RetryInstance(new RetrySettings());
+                instance = new RetryInstance(new RetrySettings(maximumNumberOfAttempts:5));
             }
 
             [Fact]
@@ -106,7 +106,7 @@ namespace RetryMagic.UnitTests
                 // act + assert
                 var aggregateException = Assert.Throws<AggregateException>(() => instance.Function(functionToTryMock.Object));
 
-                Assert.Equal(8, aggregateException.InnerExceptions.Count);
+                Assert.Equal(5, aggregateException.InnerExceptions.Count);
             }
 
 
@@ -118,7 +118,7 @@ namespace RetryMagic.UnitTests
 
             public ActionMethod()
             {
-                instance = new RetryInstance(new RetrySettings());
+                instance = new RetryInstance(new RetrySettings(maximumNumberOfAttempts:5));
             }
 
             [Fact]
@@ -162,7 +162,7 @@ namespace RetryMagic.UnitTests
                 // act + assert
                 Assert.Throws<AggregateException>(() => instance.Action(actionToTryMock.Object));
 
-                actionToTryMock.Verify(x => x(), Times.Exactly(8));
+                actionToTryMock.Verify(x => x(), Times.Exactly(5));
             }
 
             [Fact]
@@ -174,7 +174,7 @@ namespace RetryMagic.UnitTests
                 // act + assert
                 var aggregateException = Assert.Throws<AggregateException>(() => instance.Action(actionToTryMock.Object));
 
-                Assert.Equal(8, aggregateException.InnerExceptions.Count);
+                Assert.Equal(5, aggregateException.InnerExceptions.Count);
             }
         }
     }
