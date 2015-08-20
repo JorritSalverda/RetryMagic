@@ -30,7 +30,12 @@ return Retry.Function(() => { return _databaseRepository.Get(id); });
 The following default settings are used and can be changed by using the following code with different values
 
 ```csharp
-Retry.UpdateSettings(new RetrySettings(jitterSettings:new JitterSettings(percentage:25), maximumNumberOfAttempts:5, millisecondsPerSlot:32, truncateNumberOfSlots:true, maximumNumberOfSlotsWhenTruncated:16));
+Retry.UpdateSettings(new RetrySettings(
+	jitterSettings:new JitterSettings(percentage:25), 
+	maximumNumberOfAttempts:5, 
+	millisecondsPerSlot:32, 
+	truncateNumberOfSlots:true, 
+	maximumNumberOfSlotsWhenTruncated:16));
 
 ```
 
@@ -39,7 +44,12 @@ Retry.UpdateSettings(new RetrySettings(jitterSettings:new JitterSettings(percent
 If you wish to be able to inject it - for example for having different settings in different places - you can use the RetryInstance class:
 
 ```csharp
-IRetryInstance instance = new RetryInstance(new RetrySettings(jitterSettings:new JitterSettings(percentage:25), maximumNumberOfAttempts:5, millisecondsPerSlot:32, truncateNumberOfSlots:true, maximumNumberOfSlotsWhenTruncated:16));
+IRetryInstance instance = new RetryInstance(new RetrySettings(
+	jitterSettings:new JitterSettings(percentage:25), 
+	maximumNumberOfAttempts:5, 
+	millisecondsPerSlot:32, 
+	truncateNumberOfSlots:true, 
+	maximumNumberOfSlotsWhenTruncated:16));
 
 This interface and class only has the Action and Function methods without the settings parameter besides the Action or Func<T>, because you provide those during construction.
 
