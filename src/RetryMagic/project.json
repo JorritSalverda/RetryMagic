@@ -1,0 +1,50 @@
+{
+  "version": "1.1.0-*",
+  "description": "A c# library to retry code with a truncated binary exponential backoff algorithm",
+
+  "packOptions": {
+    "projectUrl": "https://github.com/JorritSalverda/RetryMagic",
+    "licenseUrl": "https://raw.githubusercontent.com/JorritSalverda/RetryMagic/master/LICENSE",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/JorritSalverda/RetryMagic.git"
+    }
+  },
+
+  "authors": [ "Jorrit Salverda" ],
+  "tooling": {
+    "defaultNamespace": "RetryMagic"
+  },
+  
+  "buildOptions": {
+     "warningsAsErrors": true
+  },
+
+  "dependencies": {
+    "JitterMagic": "1.1.2",
+    "System.Threading.Thread": "4.0.0"
+  },  
+
+  "frameworks": {
+    "netstandard1.3": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.0",
+        "System.Threading.Tasks": "	4.0.11",
+        "System.Runtime.InteropServices": "4.1.0"
+      }
+    },
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": "1.0.0",
+        "System.Threading.Tasks": "	4.0.11",
+        "System.Runtime.InteropServices": "4.1.0"
+      }
+    },
+    "net46": {
+      "dependencies": {
+        "System.Runtime.InteropServices": "4.0.20.0",
+        "System.Threading.Tasks": "4.0.10.0"        
+      }
+    }
+  }
+}
