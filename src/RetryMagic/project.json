@@ -22,7 +22,6 @@
 
   "dependencies": {
     "JitterMagic": "1.1.2",
-    "System.Threading.Thread": "4.0.0"
   },  
 
   "frameworks": {
@@ -30,21 +29,19 @@
       "dependencies": {
         "NETStandard.Library": "1.6.0",
         "System.Threading.Tasks": "	4.0.11",
-        "System.Runtime.InteropServices": "4.1.0"
+        "System.Runtime.InteropServices": "4.1.0",
+        "System.Threading.Thread": "4.0.0"
       }
     },
     "netcoreapp1.0": {
       "dependencies": {
         "Microsoft.NETCore.App": "1.0.0",
         "System.Threading.Tasks": "	4.0.11",
-        "System.Runtime.InteropServices": "4.1.0"
+        "System.Runtime.InteropServices": "4.1.0",
+        "System.Threading.Thread": "4.0.0"
       }
     },
     "net46": {
-      "dependencies": {
-        "System.Runtime.InteropServices": "4.0.20.0",
-        "System.Threading.Tasks": "4.0.10.0"        
-      }
     }
   }
 }
