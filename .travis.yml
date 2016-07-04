@@ -1,8 +1,0 @@
-language: csharp
-solution: ./src/RetryMagic.sln
-install:
-  - nuget restore ./src/RetryMagic.sln
-  #- nuget install xunit.runner.console -Version 2.1.0 -OutputDirectory testrunner
-script:
-  - xbuild /p:Configuration=Release ./src/RetryMagic.sln
-  #- mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./src/RetryMagic.UnitTests/bin/Release/RetryMagic.UnitTests.dll -noappdomain
